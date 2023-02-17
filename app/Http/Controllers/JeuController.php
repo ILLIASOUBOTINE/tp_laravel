@@ -90,7 +90,22 @@ class JeuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if ($request->validate([
+            'titre' => 'required|string|max:45',
+            'description' => 'required|string|max:254',
+            // un champ => une règle
+            ])) {
+                $jeu = Jeu::find($id);
+                $jeu->titre = $request->input('titre');
+                $jeu->description = $request->input('description');
+                $jeu->save();
+                // return redirect()->route('jeux.index');
+                return redirect()->route('jeux.show', $jeu->id);
+            // puis écriture en BDD
+        }else{
+            // Erreur
+            return redirect()->back();
+        }
     }
 
     /**
@@ -106,4 +121,6 @@ class JeuController extends Controller
         
         return redirect()->route('jeux.index');
     }
+
+   
 }

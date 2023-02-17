@@ -9,21 +9,29 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form action="" method="get" class="form-example">
+
+                    <form action="{{ route('jeux.update', $jeu->id) }}" method="POST" class="form-example">
+                             @method('PUT')
+                            @csrf
                         <div class="form-example">
-                           <p><label for="name">Titre</label></p> 
-                           <p> <input type="text" name="name" id="name" value="{{$jeu->titre}}" required></p>
-                           
+                            {{-- <p><label for="titre">Titre</label></p>  --}}
+                            <p><label for="titre">Titre</label> <input type="text" name="titre" id="titre" value="{{$jeu->titre}}" required></p>
+                            {{-- <p><label for="description">Description</label></p>  --}}
+                            <p><label for="description">Description</label> <input type="text" name="description" id="description" value="{{$jeu->description}}" required></p>
                         </div>
+                       
+                                     
+                            <button type="submit">Sauvegarder</button>
                         
-                        <div class="form-example">
-                            <x-btn class="text-white bg-sky-400" :route="route('jeux.edit',$jeu->id)" >Sauvegarder</x-btn>
-                            <x-btn class="text-black bg-stone-400" :route="route('jeux.index')" >Annuler</x-btn>
+                      
+                            {{-- <x-btn class="text-white bg-sky-400" :route="route('jeux.update',$jeu->id)" >Sauvegarder</x-btn> --}}
+                           
                             
-                        </div>
+                       
                     </form>
 
-                    
+                     <x-btn class="text-black bg-stone-400" :route="route('jeux.index')" >Annuler</x-btn>
+                
                    
                 </div>
             </div>

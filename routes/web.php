@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('jeux', JeuController::class);
     Route::resource('categories', CategorieController::class);
     Route::resource('tags', TagController::class);
-
+    // Route::get('jeux', [JeuController::class, 'redirect1'])->name('jeux.redirect1');
 });
 
 require __DIR__.'/auth.php';
