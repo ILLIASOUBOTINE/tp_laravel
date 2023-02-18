@@ -25,7 +25,7 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        //
+       return view('categories.create');
     }
 
     /**
@@ -36,7 +36,21 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->validate([
+            'libelle' => 'required|string|max:45',
+           
+            // un champ => une règle
+            ])) {
+                $categorie = new Categorie();
+                $categorie->libelle = $request->input('libelle');
+                $categorie->save();
+                
+                return redirect()->route('categories.show', $categorie->id);
+            // puis écriture en BDD
+        }else{
+            // Erreur
+            return redirect()->back();
+        }
     }
 
     /**
@@ -72,7 +86,21 @@ class CategorieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if ($request->validate([
+            'libelle' => 'required|string|max:45',
+           
+            // un champ => une règle
+            ])) {
+                $categorie = new Categorie();
+                $categorie->libelle = $request->input('libelle');
+                $categorie->save();
+                
+                return redirect()->route('categories.show', $categorie->id);
+            // puis écriture en BDD
+        }else{
+            // Erreur
+            return redirect()->back();
+        }
     }
 
     /**
@@ -83,6 +111,7 @@ class CategorieController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Categorie::destroy($id);
+        return redirect()->route('categories.index');
     }
 }

@@ -13,15 +13,10 @@
                     <p>{{$jeu->description}}</p>
                     <div class="flex justify-end">
                         <x-btn class="text-white bg-sky-400" :route="route('jeux.edit',$jeu->id)" >Modifier</x-btn>
-                        <x-btn class="text-white bg-red-400" :route="route('jeux.destroy',$jeu->id)" >Supprimer</x-btn>
+                        <x-btn-supprimer :route="route('jeux.destroy',$jeu->id)" />
                     </div>
                    
-                    {{-- <x-btn  bg1Color="red" txtColor="#fffbeb" text="Suprimer"/> --}}
-                    {{-- <a href="{{$route}}">
-                        <button class="font-bold py-2 px-4 m-1 rounded {{$class}}" >
-                            {{$title}}
-                        </button>
-                    </a> --}}
+                   
                 </div>
             </div>
         </div>

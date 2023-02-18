@@ -21,7 +21,7 @@
                            @error('description')
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
-                        <input type="submit" value="Envoyer !">
+                        <input type="submit" value="Envoyer !" class="font-bold py-2 px-4 m-1 rounded text-white bg-sky-400">
                     </form>
 
                    

@@ -66,6 +66,8 @@ class JeuController extends Controller
     public function show($id)
     {
         $jeu = Jeu::find($id);
+        $categorie = $jeu->categorie;
+        dd($categorie);
         return view('jeux.show',['jeu'=>$jeu]);
     }
 
@@ -117,8 +119,6 @@ class JeuController extends Controller
     public function destroy($id)
     {
         Jeu::destroy($id);
-      
-        
         return redirect()->route('jeux.index');
     }
 

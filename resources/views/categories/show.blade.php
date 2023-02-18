@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     <h1 class="text-2xl"> {{$categorie->libelle}}</h1>
                     <x-btn class="text-white bg-sky-400" :route="route('categories.edit',$categorie->id)" >Modifier</x-btn>
-                    <x-btn class="text-white bg-red-400" :route="route('categories.destroy',$categorie->id)" >Supprimer</x-btn>
+                    <x-btn-supprimer :route="route('categories.destroy',$categorie->id)" />
                     
                     
                 </div>

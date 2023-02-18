@@ -31,13 +31,8 @@
                                 <td class="flex items-center">
                                     <x-btn class="text-white bg-sky-400" :route="route('jeux.edit',$jeu->id)" >Modifier</x-btn>
                                     <x-btn class="text-black bg-stone-300" :route="route('jeux.show',$jeu->id)" >Voir</x-btn>
-                                    {{-- <x-btn class="text-white bg-red-400" :route="route('jeux.destroy',$jeu->id)" >Supprimer</x-btn> --}}
-                                    <form action="{{ route('jeux.destroy', $jeu->id) }}" method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                     
-                                        <button type="submit">Supprimer</button>
-                                    </form>
+                                    <x-btn-supprimer :route="route('jeux.destroy',$jeu->id)" />
+                                    
                                     
                                 </td>
                                

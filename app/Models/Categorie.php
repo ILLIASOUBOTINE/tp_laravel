@@ -13,4 +13,15 @@ class Categorie extends Model
     protected $fillable = array('libelle');
     public $timestamps = false;
 
+    /**
+    * Une catégorie a plusieurs jeux
+    *
+    * @return void
+    */
+    public function jeux()
+    {
+    return $this->hasMany(Jeu::class);
+    }
+
+
 }

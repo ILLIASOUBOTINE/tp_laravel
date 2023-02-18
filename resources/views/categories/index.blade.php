@@ -18,7 +18,7 @@
                             <th class="flex justify-around items-center">
                                 <span>ACTIONS</span> 
                                 
-                                    <x-btn class="text-white bg-green-400" :route="route('categories.create')">CREATE</x-btn>
+                                <x-btn class="text-white bg-green-400" :route="route('categories.create')">CREATE</x-btn>
                               
                             </th>
                             
@@ -30,10 +30,11 @@
                             <tr>
                                 <td>{{$categorie->id}}</td>
                                 <td>{{$categorie->libelle}}</td>
-                                <td>
-                                     <x-btn class="text-white bg-sky-400" :route="route('categories.edit',$categorie->id)" >Modifier</x-btn>
+                                <td class="flex items-center">
+                                    <x-btn class="text-white bg-sky-400" :route="route('categories.edit',$categorie->id)" >Modifier</x-btn>
                                     <x-btn class="text-black bg-stone-300" :route="route('categories.show',$categorie->id)" >Voir</x-btn>
-                                    <x-btn class="text-white bg-red-400" :route="route('categories.destroy',$categorie->id)" >Supprimer</x-btn>
+                                    <x-btn-supprimer :route="route('categories.destroy',$categorie->id)" />
+                                    
                                
                                 </td>
                                

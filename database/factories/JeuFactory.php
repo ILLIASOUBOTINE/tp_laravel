@@ -18,7 +18,8 @@ class JeuFactory extends Factory
     {
         return [
             'titre' => ucwords($this->faker->unique()->words(2, true)),
-            'description' => $this->faker->unique()->words(30, true)
+            'description' => $this->faker->unique()->words(30, true),
+            'categorie_id' => $this->faker->numberBetween(1,10)
         ];
     }
 }
