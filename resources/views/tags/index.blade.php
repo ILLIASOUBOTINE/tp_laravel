@@ -30,8 +30,8 @@
                             <tr>
                                 <td>{{$tag->id}}</td>
                                 <td>{{$tag->nom}}</td>
-                                <td>
-                                     <x-btn class="text-white bg-sky-400" :route="route('tags.edit',$tag->id)" >Modifier</x-btn>
+                                <td class="flex">
+                                    <x-btn class="text-white bg-sky-400" :route="route('tags.edit',$tag->id)" >Modifier</x-btn>
                                     <x-btn class="text-black bg-stone-300" :route="route('tags.show',$tag->id)" >Voir</x-btn>
                                     <x-btn class="text-white bg-red-400" :route="route('tags.destroy',$tag->id)" >Supprimer</x-btn>
                                

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use App\Models\Jeu;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class JeuController extends Controller
@@ -25,7 +27,8 @@ class JeuController extends Controller
      */
     public function create()
     {
-        return view('jeux.create');
+        $categories = Categorie::all();
+        return view('jeux.create',['categories'=>$categories]);
     }
 
     /**
@@ -66,8 +69,8 @@ class JeuController extends Controller
     public function show($id)
     {
         $jeu = Jeu::find($id);
-        $categorie = $jeu->categorie;
-        dd($categorie);
+        // $categorie = $jeu->categorie;
+        // dd($categorie);
         return view('jeux.show',['jeu'=>$jeu]);
     }
 
@@ -80,7 +83,22 @@ class JeuController extends Controller
     public function edit($id)
     {
         $jeu = Jeu::find($id);
-        return view('jeux.edit',['jeu'=>$jeu]);
+       
+        $categories = Categorie::all();
+        $tags = Tag::all();
+        $tagsJeu = $jeu->tags;
+       
+        $index = 0;
+        foreach ($tags as $tag) {
+            foreach ($tagsJeu as $tagJeu) {
+                if ($tag->id == $tagJeu->id) {
+                    $tags->forget($index);
+                }
+            }
+            $index++;
+        }
+        // dd($tags);
+        return view('jeux.edit',['jeu'=>$jeu,'categories'=>$categories, 'tags'=> $tags]);
     }
 
     /**
@@ -92,6 +110,7 @@ class JeuController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request);
         if ($request->validate([
             'titre' => 'required|string|max:45',
             'description' => 'required|string|max:254',
@@ -100,6 +119,7 @@ class JeuController extends Controller
                 $jeu = Jeu::find($id);
                 $jeu->titre = $request->input('titre');
                 $jeu->description = $request->input('description');
+                $jeu->categorie_id = $request->input('categorie');
                 $jeu->save();
                 // return redirect()->route('jeux.index');
                 return redirect()->route('jeux.show', $jeu->id);
@@ -122,5 +142,29 @@ class JeuController extends Controller
         return redirect()->route('jeux.index');
     }
 
+    public function attach(Request $request, $id_jeu) {
+        // dd($request);
+        if ($request->validate([
+            'tag' => 'required|string|max:45',
+           
+            // un champ => une règle
+            ])) {
+                $jeu = Jeu::find($id_jeu);
+                $jeu->tags()->attach($request->input('tag'));
+                
+                return redirect()->back();
+            // puis écriture en BDD
+        }else{
+            // Erreur
+            return redirect()->back();
+        }
+    }
+        
+    public function detach($id_jeu, $id_tag) {
+        $jeu = Jeu::find($id_jeu);
+        $jeu->tags()->detach($id_tag);
+        return redirect()->back();
+    }
+        
    
 }
